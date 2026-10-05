@@ -1,0 +1,176 @@
+{
+  "project_name": "Kalyani Technologies Marketing Website",
+  "archetype": "LUXURY & PERFORMANCE TECH (Deep Obsidian, Luminous Teal, Coral Red Accent)",
+  "color_scheme": "Dark-by-default with rich deep navy-black tones, luminous electric teal highlights, and warm coral/terracotta accents inspired by the brand mark",
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#070B12",
+        "on_bg": "#F1F5F9",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "brand_teal": "#14B8A6",
+          "brand_coral": "#FF5A36",
+          "border": "#1E293B",
+          "border_glow": "rgba(20, 184, 166, 0.3)"
+        }
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#0B132B",
+        "on_bg": "#FFFFFF",
+        "on_bg_muted": "#CBD5E1",
+        "roles": {
+          "brand_teal": "#2DD4BF",
+          "brand_coral": "#FF6B4A",
+          "border": "#1E2C4F",
+          "hover_bg": "#111D3E"
+        }
+      },
+      {
+        "name": "panel_alt",
+        "kind": "solid",
+        "bg": "#0F1A36",
+        "on_bg": "#FFFFFF",
+        "on_bg_muted": "#94A3B8"
+      },
+      {
+        "name": "inverse",
+        "kind": "solid",
+        "bg": "#F8FAFC",
+        "on_bg": "#070B12",
+        "on_bg_muted": "#475569"
+      },
+      {
+        "name": "hero",
+        "kind": "gradient",
+        "contrast_against": "#070B12",
+        "guarantee": "scrim: radial-gradient(circle at 50% 20%, rgba(20, 184, 166, 0.15) 0%, rgba(7, 11, 18, 0.95) 75%)",
+        "on_bg": "#FFFFFF",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "link": "#2DD4BF",
+          "error": "#F87171",
+          "success": "#34D399"
+        }
+      },
+      {
+        "name": "glass_header",
+        "kind": "glass",
+        "contrast_against": "#070B12",
+        "guarantee": "backdrop-blur-xl bg-[#070B12]/80 border-b border-[#1E293B]/60",
+        "on_bg": "#F1F5F9",
+        "on_bg_muted": "#94A3B8"
+      },
+      {
+        "name": "badge_teal",
+        "kind": "solid",
+        "bg": "#0D2B2C",
+        "on_bg": "#2DD4BF",
+        "on_bg_muted": "#14B8A6"
+      },
+      {
+        "name": "badge_coral",
+        "kind": "solid",
+        "bg": "#2C1210",
+        "on_bg": "#FF8A70",
+        "on_bg_muted": "#FF5A36"
+      }
+    ],
+    "accent": "#14B8A6",
+    "on_accent": "#042F2E",
+    "secondary_accent": "#FF5A36",
+    "on_secondary_accent": "#FFFFFF"
+  },
+  "typography": {
+    "font_family_heading": "Lora Variable, Georgia, serif",
+    "font_family_sans": "Plus Jakarta Sans Variable, system-ui, sans-serif",
+    "font_family_mono": "JetBrains Mono Variable, monospace",
+    "scale_px": {
+      "display": 60,
+      "h1": 48,
+      "h2": 36,
+      "h3": 24,
+      "body": 16,
+      "caption": 14
+    },
+    "rules": {
+      "headings": "Lora serif for major editorial titles and logo mark ('KALYANI'), with high contrast weight and tracking-tight",
+      "subheadings_overlines": "Plus Jakarta Sans with uppercase letterspacing tracking-[0.2em] for 'TECHNOLOGIES' and section tags",
+      "body": "Plus Jakarta Sans for high legibility, line-height leading-relaxed, text-[#94A3B8] to text-[#CBD5E1]"
+    }
+  },
+  "entry_surfaces": {
+    "/": "editorial split hero — left: kinetic headline with line-by-line reveal & glowing teal 4-pointed star badge + dual CTAs; right: interactive 3D particle constellation / code architecture showcase widget with live system metrics"
+  },
+  "visual_enhancers": {
+    "brand_mark": "4-pointed geometric star/sparkle SVG (filled luminous teal #14B8A6 / #2DD4BF) with soft glow drop-shadow-[0_0_16px_rgba(20,184,166,0.5)]",
+    "background_textures": "Subtle SVG noise grain overlay (opacity 0.03) across all deep sections; radial teal (#14B8A6/10) and coral (#FF5A36/08) ambient light bleeds",
+    "tracing_beam_cards": "1px borders with border-[#1E293B] transitioning to border-[#14B8A6]/60 on hover with subtle glow",
+    "editorial_marquee": "Slow, elegant drift marquee for tech stack & client trust badges using Plus Jakarta Sans + subtle mono separators"
+  },
+  "grids_and_layouts": {
+    "hero_section": "12-column grid. Left 7 cols for narrative & primary actions, right 5 cols for interactive architecture showcase & live metrics",
+    "services_bento_grid": "MODE A Tetris Bento Grid (grid-cols-1 md:grid-cols-12 gap-6): Card 1 (Custom Software Architecture - 8 cols, row-span-2 with code visual), Card 2 (AI/ML Engineering - 4 cols), Card 3 (Cloud & DevOps - 4 cols), Card 4 (Web & Mobile Apps - 6 cols), Card 5 (UI/UX Engineering - 6 cols), Card 6 (IT Consulting & Strategy - 12 cols banner)",
+    "stats_section": "4-column high density stat counters with crisp top borders and +99.9% uptime, 45+ enterprise clients, 120+ launched platforms, 15ms avg latency",
+    "portfolio_showcase": "Asymmetric staggered showcase with interactive project filter tabs (Enterprise SaaS, FinTech, AI Engines, Cloud Native)",
+    "contact_section": "Split layout (5 cols company info, Bangalore/Hyderabad presence, SLA guarantee + 7 cols interactive inquiry form with validation connecting to FastAPI backend)"
+  },
+  "motion": {
+    "scroll": "Lenis smooth scroll integration for weighted, luxurious momentum",
+    "entrance_reveals": "motion/react staggerContainer with subtle translateY: [20, 0] and opacity: [0, 1], ease: [0.22, 1, 0.36, 1]",
+    "interactive_cards": "Hover tilt/lift transform: translateY(-4px) with transition: 'transform 0.25s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.25s ease'",
+    "star_pulse": "Slow breathing rotation (360deg over 30s) or sparkle scale micro-animation on logo mark"
+  },
+  "accessibility": {
+    "contrast_compliance": "All text tokens exceed WCAG AA 4.5:1 ratio on deep navy surfaces (#F1F5F9 and #CBD5E1 on #070B12 and #0B132B)",
+    "reduced_motion": "All motion/react components respect prefers-reduced-motion via Framer Motion configuration",
+    "testing_ids": "Every interactive button, link, tab, input, and submit element must declare explicit data-testid attributes (e.g. data-testid='nav-contact-btn', data-testid='contact-form-submit')"
+  },
+  "image_urls": {
+    "team_and_collaboration": [
+      {
+        "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJTIwdGVhbSUyMHRlY2h8ZW58MHx8fHwxNzkxMTU3MzI4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Collaborative engineering team discussing software architecture",
+        "category": "about_section"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1536148935331-408321065b18?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJTIwdGVhbSUyMHRlY2h8ZW58MHx8fHwxNzkxMTU3MzI4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Lead engineer developing full-stack code on dual monitors",
+        "category": "portfolio_case_study"
+      }
+    ],
+    "tech_and_ui": [
+      {
+        "url": "https://images.unsplash.com/photo-1769686420474-3c1f242aa64f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjB0ZWNobm9sb2d5JTIwZnV0dXJpc3RpYyUyMGludGVyZmFjZXxlbnwwfHx8fDE3OTExNTczMjh8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Modern mobile application interface ecosystem",
+        "category": "services_mobile"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1761305135372-bc5c84c402d0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjB0ZWNobm9sb2d5JTIwZnV0dXJpc3RpYyUyMGludGVyZmFjZXxlbnwwfHx8fDE3OTExNTczMjh8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Next-gen AI assistant and platform interface",
+        "category": "services_ai"
+      }
+    ]
+  },
+  "component_path": {
+    "app_shell": "frontend/src/App.tsx",
+    "css_theme_entry": "frontend/src/index.css",
+    "pages": "frontend/src/pages/Home.tsx",
+    "components": "frontend/src/components/",
+    "backend_inquiry_router": "backend/routers/inquiries.py"
+  },
+  "instructions_to_main_agent": [
+    "1. Replace index.html default HTML tag with <html class='dark'> and set title to 'Kalyani Technologies | Enterprise Software & AI Engineering'. Add SVG favicon representing the 4-pointed teal star mark.",
+    "2. In frontend/src/index.css: import '@fontsource-variable/lora', '@fontsource-variable/plus-jakarta-sans', '@fontsource-variable/jetbrains-mono'. Configure @theme with --font-heading: 'Lora Variable', serif and --font-sans: 'Plus Jakarta Sans Variable', sans-serif. Apply color tokens from this specification.",
+    "3. Build the Brand Header with the exact Kalyani Technologies logo: 4-pointed sparkle SVG mark in teal (#14B8A6), 'KALYANI' in serif (Lora), and 'TECHNOLOGIES' below in coral uppercase with letterspacing tracking-[0.25em]. Provide smooth navigation links (Services, Solutions, Work, About, Contact) and a primary CTA 'Start a Project'.",
+    "4. Implement the Hero Section: Asymmetric layout with badge 'Next-Gen Software Engineering', bold headline with highlighted words in Teal & Coral, subtext, dual CTA buttons ('Explore Capabilities' and 'Schedule Consultation'), and an interactive Live Architecture Terminal widget with animated logs, uptime, and latency indicators.",
+    "5. Implement Bento Grid for 6 core services (Custom Software, AI/ML, Cloud Native, Web & Mobile, UI/UX, IT Consulting) with interactive hover cards, feature badges, and micro-metric displays.",
+    "6. Build a live, working Contact & Project Estimation module that submits to the FastAPI backend at POST /api/inquiries, displaying Sonner toast notifications on success.",
+    "7. Include Testimonials, Enterprise Tech Stack slow marquee, Stats counter, and a massive editorial Footer.",
+    "8. Ensure every button, input, tab, and card has explicit data-testid attributes for automated testing."
+  ]
+}
