@@ -17,13 +17,11 @@ Marketing site with hero, services, work, about, testimonials, contact form pers
 
 ## Implemented
 - 2026-10-04: Full site v1 — all sections above, working enquiry form (POST /api/inquiries) with validation + Sonner toasts, /admin enquiries table, mobile nav, favicon, typecheck clean, e2e verified via public URL (curl + browser pass).
+- 2026-10-14: Admin auth (email+password, httpOnly cookie sessions: 15-min access + 7-day refresh, /api/auth/login|logout|me|refresh, 5-strike 15-min brute-force lockout, idempotent admin seed from env). /admin now requires login; Login page at /login with silent refresh retry.
+- 2026-10-14: Email alerts — every new enquiry emails the owner via Emergent-managed Resend (background task, never blocks the form; recipient = OWNER_EMAIL in backend/.env, currently test sink pending the owner's real address).
+- 2026-10-14: Case study pages at /work/:slug (4 projects, shared data in frontend/src/data/projects.ts), linked from the Work grid, with overview/challenge/solution, stack, results and next-project navigation.
 
 ## Backlog
-- P0: Protect /admin with auth (login) before going live.
-- P1: Email notification on new enquiry (Resend).
-- P1: Real portfolio content/images from the client.
-- P2: Blog/insights, careers page, case-study detail pages, SEO audit, i18n.
-
-## Next tasks
-1. Confirm real service list, contact email/phone, and portfolio items with the client.
-2. Add admin auth, then email notifications.
+- P0: Replace OWNER_EMAIL with the owner's real inbox (ask user); real portfolio content from the client.
+- P1: Forgot/reset password flow; enquiry status management in /admin.
+- P2: Blog/insights, careers page, SEO audit, i18n.

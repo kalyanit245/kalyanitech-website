@@ -1,15 +1,51 @@
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { apiGet } from "@/lib/api";
+import { Navigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
+import { ApiError, apiGet, apiPost } from "@/lib/api";
+import { endSession } from "@/lib/session";
 import type { Inquiry } from "@/lib/types";
 import { StarMark } from "@/components/StarMark";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
+interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+}
+
+const fetchMe = async (): Promise<AdminUser> => {
+  try {
+    return await apiGet<AdminUser>("/auth/me");
+  } catch (e) {
+    if (e instanceof ApiError && e.status === 401) {
+      await apiPost("/auth/refresh");
+      return await apiGet<AdminUser>("/auth/me");
+    }
+    throw e;
+  }
+};
+
 export default function Admin() {
+  const me = useQuery({ queryKey: ["auth-me"], queryFn: fetchMe, retry: false, staleTime: 60_000 });
   const { data, isLoading, isError } = useQuery({
     queryKey: ["inquiries"],
     queryFn: () => apiGet<Inquiry[]>("/inquiries"),
+    enabled: !!me.data,
   });
+
+  if (me.isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
+        <p className="font-mono text-sm uppercase tracking-[0.2em] text-mist" data-testid="admin-session-loading">Checking session…</p>
+      </div>
+    );
+  }
+
+  if (me.isError) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -21,9 +57,19 @@ export default function Admin() {
             <h1 className="font-heading text-xl tracking-wide">KALYANI — Project Enquiries</h1>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist">Internal dashboard</p>
           </div>
-          <a href="/" data-testid="admin-back-link" className="ml-auto text-sm text-teal-bright hover:text-foreground">
-            ← Back to site
+          <span className="ml-auto hidden font-mono text-xs text-mist sm:block" data-testid="admin-user-email">
+            {me.data?.email}
+          </span>
+          <a href="/" data-testid="admin-back-link" className="text-sm text-teal-bright hover:text-foreground">
+            ← Site
           </a>
+          <button
+            data-testid="admin-logout-button"
+            onClick={() => void endSession("/login")}
+            className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-xs font-semibold uppercase tracking-wider text-mist transition-colors hover:border-coral/60 hover:text-coral-soft"
+          >
+            <LogOut className="h-3.5 w-3.5" /> Sign out
+          </button>
         </div>
       </header>
 
