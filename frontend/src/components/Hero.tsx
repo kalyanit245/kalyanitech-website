@@ -58,7 +58,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-teal/30 bg-[#0D2B2C]/60 px-4 py-1.5"
+            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-teal/30 bg-teal/10 px-4 py-1.5"
             data-testid="hero-badge"
           >
             <StarMark className="h-3.5 w-3.5 text-teal-bright" />
@@ -121,14 +121,14 @@ export const Hero = () => {
         >
           <div
             data-testid="hero-terminal"
-            className="relative rounded-2xl border border-line bg-panel/90 shadow-[0_40px_120px_-40px_rgba(20,184,166,0.25)] backdrop-blur"
+            className="relative rounded-2xl border border-[#1E293B] bg-[#0B132B] shadow-[0_40px_120px_-40px_rgba(20,184,166,0.35)]"
           >
-            <div className="flex items-center gap-2 border-b border-line px-5 py-3.5">
+            <div className="flex items-center gap-2 border-b border-[#1E293B] px-5 py-3.5">
               <span className="h-2.5 w-2.5 rounded-full bg-coral/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#EAB308]/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-teal/80" />
-              <span className="ml-3 font-mono text-xs text-mist">kalyani · deploy console</span>
-              <span className="pulse-dot ml-auto h-2 w-2 rounded-full bg-teal-bright" />
+              <span className="ml-3 font-mono text-xs text-[#94A3B8]">kalyani · deploy console</span>
+              <span className="pulse-dot ml-auto h-2 w-2 rounded-full bg-[#2DD4BF]" />
             </div>
             <div className="h-56 space-y-2.5 overflow-hidden px-5 py-4 font-mono text-[13px] leading-relaxed">
               {LOG_LINES.slice(0, logCount).map((line, i) => (
@@ -137,21 +137,21 @@ export const Hero = () => {
                   initial={{ opacity: 0, x: -6 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
-                  className={line.startsWith("✓") ? "text-teal-bright" : line.startsWith("$") ? "text-foreground" : "text-mist"}
+                  className={line.startsWith("✓") ? "text-[#2DD4BF]" : line.startsWith("$") ? "text-[#F1F5F9]" : "text-[#94A3B8]"}
                 >
                   {line}
                 </motion.p>
               ))}
             </div>
-            <div className="grid grid-cols-3 divide-x divide-line border-t border-line">
+            <div className="grid grid-cols-3 divide-x divide-[#1E293B] border-t border-[#1E293B]">
               {[
                 { k: "UPTIME", v: "99.99%" },
                 { k: "P95 LATENCY", v: "15ms" },
                 { k: "DEPLOYS / WK", v: "63" },
               ].map((m) => (
                 <div key={m.k} className="px-4 py-4 text-center">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-mist">{m.k}</p>
-                  <p className="mt-1 font-mono text-lg font-semibold text-teal-bright">{m.v}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#94A3B8]">{m.k}</p>
+                  <p className="mt-1 font-mono text-lg font-semibold text-[#2DD4BF]">{m.v}</p>
                 </div>
               ))}
             </div>

@@ -31,7 +31,7 @@ export const Nav = () => {
       data-testid="site-nav"
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled || open
-          ? "border-b border-line/70 bg-[#070B12]/85 backdrop-blur-xl"
+          ? "border-b border-line/70 bg-white/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -86,7 +86,7 @@ export const Nav = () => {
       </div>
 
       {open && (
-        <div className="border-t border-line/60 bg-[#070B12]/95 px-6 py-6 backdrop-blur-xl lg:hidden" data-testid="nav-mobile-menu">
+        <div className="border-t border-line/60 bg-white/95 px-6 py-6 backdrop-blur-xl lg:hidden" data-testid="nav-mobile-menu">
           <div className="flex flex-col gap-4">
             {LINKS.map((l) => (
               <button

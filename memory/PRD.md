@@ -20,6 +20,7 @@ Marketing site with hero, services, work, about, testimonials, contact form pers
 - 2026-10-14: Admin auth (email+password, httpOnly cookie sessions: 15-min access + 7-day refresh, /api/auth/login|logout|me|refresh, 5-strike 15-min brute-force lockout, idempotent admin seed from env). /admin now requires login; Login page at /login with silent refresh retry.
 - 2026-10-14: Email alerts — every new enquiry emails the owner via Emergent-managed Resend (background task, never blocks the form; recipient = OWNER_EMAIL in backend/.env, currently test sink pending the owner's real address).
 - 2026-10-14: Case study pages at /work/:slug (4 projects, shared data in frontend/src/data/projects.ts), linked from the Work grid, with overview/challenge/solution, stack, results and next-project navigation.
+- 2026-10-14: Rethemed the entire site to a white/light palette (user request) — soft-white background #F7F9FC, white panels, darker teal for text accents; the hero deploy console and service code editor stay deliberately dark as contrast moments.
 
 ## Backlog
 - P0: Replace OWNER_EMAIL with the owner's real inbox (ask user); real portfolio content from the client.

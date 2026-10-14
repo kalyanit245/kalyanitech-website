@@ -68,13 +68,13 @@ const SERVICES: Service[] = [
 ];
 
 const CODE_SNIPPET = [
-  { text: "@kernel.module('payments')", cls: "text-teal-bright" },
-  { text: "export class LedgerService {", cls: "text-foreground" },
-  { text: "  @Transactional({ isolation: 'SERIALIZABLE' })", cls: "text-mist" },
-  { text: "  async settle(batch: SettlementBatch) {", cls: "text-foreground" },
-  { text: "    return this.ledger.commit(batch, { idempotent: true });", cls: "text-coral-soft" },
-  { text: "  }", cls: "text-foreground" },
-  { text: "}", cls: "text-foreground" },
+  { text: "@kernel.module('payments')", cls: "text-[#2DD4BF]" },
+  { text: "export class LedgerService {", cls: "text-[#F1F5F9]" },
+  { text: "  @Transactional({ isolation: 'SERIALIZABLE' })", cls: "text-[#94A3B8]" },
+  { text: "  async settle(batch: SettlementBatch) {", cls: "text-[#F1F5F9]" },
+  { text: "    return this.ledger.commit(batch, { idempotent: true });", cls: "text-[#FF8A70]" },
+  { text: "  }", cls: "text-[#F1F5F9]" },
+  { text: "}", cls: "text-[#F1F5F9]" },
 ];
 
 export const Services = () => (
@@ -105,7 +105,7 @@ export const Services = () => (
               }`}
             >
               <div className={s.banner ? "md:max-w-2xl" : ""}>
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-[#0D2B2C]/60 text-teal-bright transition-transform duration-300 group-hover:scale-110">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 text-teal-bright transition-transform duration-300 group-hover:scale-110">
                   <s.icon className="h-5 w-5" />
                 </div>
                 <h3 className="font-heading text-xl text-foreground md:text-2xl">{s.title}</h3>
@@ -119,8 +119,8 @@ export const Services = () => (
                 </div>
               </div>
               {s.code && (
-                <div className="mt-8 overflow-hidden rounded-xl border border-line bg-[#070B12] md:flex-1">
-                  <div className="border-b border-line px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-mist">
+                <div className="mt-8 overflow-hidden rounded-xl border border-[#1E293B] bg-[#070B12] md:flex-1">
+                  <div className="border-b border-[#1E293B] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#94A3B8]">
                     ledger.service.ts
                   </div>
                   <pre className="space-y-1 px-5 py-4 font-mono text-[12.5px] leading-relaxed">
