@@ -25,6 +25,11 @@ INDEXES: dict[str, list[IndexModel]] = {
     ],
     "users": [IndexModel([("email", ASCENDING)], name="email", unique=True)],
     "login_attempts": [IndexModel([("identifier", ASCENDING)], name="identifier")],
+    "password_reset_tokens": [IndexModel([("expires_at", ASCENDING)], name="expires_at_ttl", expireAfterSeconds=0)],
+    "jobs": [
+        IndexModel([("id", ASCENDING)], name="id", unique=True),
+        IndexModel([("created_at", DESCENDING)], name="created_at_desc"),
+    ],
 }
 
 

@@ -8,3 +8,13 @@ export interface Inquiry {
   message: string;
   created_at: string;
 }
+
+export interface Job {
+  id: string;
+  title: string;
+  technology: string;
+  location: string;
+  job_type: string;
+  description: string;
+  created_at: string;
+}

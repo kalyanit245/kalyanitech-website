@@ -20,7 +20,7 @@ export const About = () => (
               className="aspect-[4/5] w-full object-cover"
             />
           </div>
-          <div className="absolute -bottom-6 -right-4 flex items-center gap-3 rounded-2xl border border-teal/30 bg-white/90 px-5 py-4 shadow-lg backdrop-blur lg:-right-8">
+          <div className="absolute -bottom-6 -right-4 flex items-center gap-3 rounded-2xl border border-teal/30 bg-white/90 px-5 py-4 shadow-lg backdrop-blur lg:-right-8 dark:bg-[#070B12]/90">
             <StarMark className="star-turn h-8 w-8 text-teal" />
             <div>
               <p className="font-heading text-lg text-foreground">Since 2016</p>

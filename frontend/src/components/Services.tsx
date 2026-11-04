@@ -105,7 +105,7 @@ export const Services = () => (
               }`}
             >
               <div className={s.banner ? "md:max-w-2xl" : ""}>
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 text-teal-bright transition-transform duration-300 group-hover:scale-110">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 text-teal-bright transition-transform duration-300 group-hover:scale-110 dark:bg-[#0D2B2C]/60">
                   <s.icon className="h-5 w-5" />
                 </div>
                 <h3 className="font-heading text-xl text-foreground md:text-2xl">{s.title}</h3>

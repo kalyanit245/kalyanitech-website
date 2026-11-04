@@ -58,7 +58,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-teal/30 bg-teal/10 px-4 py-1.5"
+            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-teal/30 bg-teal/10 px-4 py-1.5 dark:bg-[#0D2B2C]/60"
             data-testid="hero-badge"
           >
             <StarMark className="h-3.5 w-3.5 text-teal-bright" />

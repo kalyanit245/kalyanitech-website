@@ -71,7 +71,7 @@ export default function Login() {
           <p className="mt-2 text-sm text-mist">Sign in to view project enquiries.</p>
 
           {error && (
-            <div data-testid="login-error" role="alert" className="mt-6 rounded-xl border border-coral/40 bg-coral/10 px-4 py-3 text-sm text-coral-soft">
+            <div data-testid="login-error" role="alert" className="mt-6 rounded-xl border border-coral/40 bg-coral/10 px-4 py-3 text-sm text-coral-soft dark:bg-[#2C1210]/60">
               {error}
             </div>
           )}
@@ -115,6 +115,12 @@ export default function Login() {
           >
             {submitting ? "Signing in…" : "Sign In"}
           </button>
+
+          <p className="mt-4 text-center">
+            <Link to="/forgot-password" data-testid="login-forgot-link" className="text-sm text-mist transition-colors hover:text-teal-bright">
+              Forgot your password?
+            </Link>
+          </p>
         </form>
 
         <p className="mt-6 text-center">

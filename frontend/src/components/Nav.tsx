@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { StarMark } from "./StarMark";
 import { scrollToId } from "./Reveal";
 
@@ -31,7 +32,7 @@ export const Nav = () => {
       data-testid="site-nav"
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled || open
-          ? "border-b border-line/70 bg-white/85 backdrop-blur-xl"
+          ? "border-b border-line/70 bg-white/85 backdrop-blur-xl dark:bg-[#070B12]/85"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -62,6 +63,13 @@ export const Nav = () => {
               {l.label}
             </button>
           ))}
+          <Link
+            to="/careers"
+            data-testid="nav-link-careers"
+            className="text-sm text-mist transition-colors duration-200 hover:text-teal-bright"
+          >
+            Careers
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -86,7 +94,7 @@ export const Nav = () => {
       </div>
 
       {open && (
-        <div className="border-t border-line/60 bg-white/95 px-6 py-6 backdrop-blur-xl lg:hidden" data-testid="nav-mobile-menu">
+        <div className="border-t border-line/60 bg-white/95 px-6 py-6 backdrop-blur-xl dark:bg-[#070B12]/95 lg:hidden" data-testid="nav-mobile-menu">
           <div className="flex flex-col gap-4">
             {LINKS.map((l) => (
               <button
@@ -98,6 +106,14 @@ export const Nav = () => {
                 {l.label}
               </button>
             ))}
+            <Link
+              to="/careers"
+              data-testid="nav-mobile-link-careers"
+              onClick={() => setOpen(false)}
+              className="text-left text-lg text-foreground/90"
+            >
+              Careers
+            </Link>
             <button
               data-testid="nav-mobile-cta"
               onClick={() => go("contact")}

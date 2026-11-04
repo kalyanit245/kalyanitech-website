@@ -21,7 +21,7 @@ export default function CaseStudy() {
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="grain-overlay" aria-hidden="true" />
 
-      <header className="border-b border-line/70 bg-white/85 backdrop-blur-xl">
+      <header className="border-b border-line/70 bg-white/85 backdrop-blur-xl dark:bg-[#070B12]/85">
         <div className="mx-auto flex h-20 max-w-7xl items-center gap-3 px-6 lg:px-10">
           <Link to="/" data-testid="case-study-logo" className="flex items-center gap-3">
             <StarMark className="h-6 w-6 text-teal" />
@@ -39,7 +39,7 @@ export default function CaseStudy() {
       <main className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="pt-20 lg:pt-28">
           <div className="flex items-center gap-4">
-            <span className="rounded-full border border-teal/30 bg-teal/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-teal-bright">
+            <span className="rounded-full border border-teal/30 bg-teal/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-teal-bright dark:bg-[#0D2B2C]/60">
               {project.category}
             </span>
             <span className="font-mono text-sm text-mist">{project.year}</span>

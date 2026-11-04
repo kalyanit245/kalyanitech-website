@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import os
+import secrets
 import uuid
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
@@ -18,7 +19,7 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 from lib.db import client, db, ensure_indexes
-from lib.email import notify_new_inquiry
+from lib.email import notify_new_inquiry, send_password_reset_email
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -91,10 +92,46 @@ async def seed_admin() -> None:
         logger.info("Updated admin password for %s", email)
 
 
+SAMPLE_JOBS = [
+    {
+        "title": "Senior Full-Stack Engineer",
+        "technology": "React · TypeScript · FastAPI",
+        "location": "Bengaluru / Hyderabad · Hybrid",
+        "job_type": "Full-time",
+        "description": "Own product surfaces end to end — from React frontends to FastAPI services and PostgreSQL schemas. You'll ship weekly, talk to clients directly, and help set our engineering bar.",
+    },
+    {
+        "title": "AI/ML Engineer",
+        "technology": "Python · PyTorch · LLM Ops",
+        "location": "Bengaluru · Hybrid",
+        "job_type": "Full-time",
+        "description": "Build retrieval pipelines, evaluation harnesses, and production LLM features for fintech and logistics clients. You care about latency budgets and measurable accuracy, not demo magic.",
+    },
+    {
+        "title": "Cloud & DevOps Engineer",
+        "technology": "Kubernetes · AWS · Terraform",
+        "location": "Hyderabad / Remote (India)",
+        "job_type": "Full-time",
+        "description": "Run the platforms our clients deploy to: GitOps pipelines, zero-downtime rollouts, observability, and cost discipline. 99.99% uptime is your baseline, not your stretch goal.",
+    },
+]
+
+
+async def seed_jobs() -> None:
+    if await db.jobs.count_documents({}) > 0:
+        return
+    now = datetime.now(timezone.utc)
+    await db.jobs.insert_many([
+        {"id": str(uuid.uuid4()), "created_at": now, **job} for job in SAMPLE_JOBS
+    ])
+    logger.info("Seeded %d sample job postings", len(SAMPLE_JOBS))
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.index_task = asyncio.create_task(ensure_indexes())
     await seed_admin()
+    await seed_jobs()
     yield
     client.close()
 
@@ -191,6 +228,83 @@ async def refresh(request: Request, response: Response):
         raise HTTPException(status_code=401, detail="User not found")
     set_auth_cookies(response, user["id"], user["email"])
     return {"status": "refreshed"}
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(min_length=8, max_length=128)
+
+
+@api_router.post("/auth/forgot-password")
+async def forgot_password(input: ForgotPasswordRequest):
+    # Always 200: never reveal whether the account exists.
+    email = input.email.lower()
+    user = await db.users.find_one({"email": email})
+    if user:
+        token = secrets.token_urlsafe(32)
+        await db.password_reset_tokens.insert_one({
+            "token": token,
+            "email": email,
+            "expires_at": datetime.now(timezone.utc) + timedelta(hours=1),
+            "used": False,
+            "created_at": datetime.now(timezone.utc),
+        })
+        asyncio.create_task(send_password_reset_email(email, token))
+    return {"status": "ok"}
+
+
+@api_router.post("/auth/reset-password")
+async def reset_password(input: ResetPasswordRequest):
+    now = datetime.now(timezone.utc)
+    doc = await db.password_reset_tokens.find_one({"token": input.token})
+    if not doc or doc.get("used"):
+        raise HTTPException(status_code=400, detail="Invalid or expired reset link")
+    expires = doc["expires_at"]
+    if expires.tzinfo is None:
+        expires = expires.replace(tzinfo=timezone.utc)
+    if expires < now:
+        raise HTTPException(status_code=400, detail="Invalid or expired reset link")
+    await db.users.update_one({"email": doc["email"]}, {"$set": {"password_hash": hash_password(input.new_password)}})
+    await db.password_reset_tokens.update_one({"token": input.token}, {"$set": {"used": True}})
+    return {"status": "password updated"}
+
+
+class JobCreate(BaseModel):
+    title: str = Field(min_length=2, max_length=120)
+    technology: str = Field(min_length=2, max_length=160)
+    location: str = Field(default="Bengaluru / Hyderabad · Hybrid", max_length=120)
+    job_type: str = Field(default="Full-time", max_length=60)
+    description: str = Field(min_length=10, max_length=4000)
+
+
+class Job(JobCreate):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+@api_router.get("/jobs", response_model=List[Job])
+async def list_jobs():
+    docs = await db.jobs.find().sort("created_at", -1).to_list(200)
+    return [Job(**doc) for doc in docs]
+
+
+@api_router.post("/jobs", response_model=Job)
+async def create_job(input: JobCreate, user: dict = Depends(get_current_user)):
+    job = Job(**input.model_dump())
+    await db.jobs.insert_one(job.model_dump())
+    return job
+
+
+@api_router.delete("/jobs/{job_id}")
+async def delete_job(job_id: str, user: dict = Depends(get_current_user)):
+    result = await db.jobs.delete_one({"id": job_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return {"status": "deleted"}
 
 
 @api_router.post("/inquiries", response_model=Inquiry)

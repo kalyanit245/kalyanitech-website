@@ -171,3 +171,48 @@ async def notify_new_inquiry(inquiry) -> None:
         logger.info("Inquiry notification sent (id=%s) to %s", email_id, OWNER_EMAIL)
     except Exception:
         logger.exception("Failed to send inquiry notification email")
+
+
+def _reset_email_html(reset_url: str) -> str:
+    return (
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+        'style="background:#070B12;padding:32px 16px;font-family:Arial,sans-serif">'
+        '<tr><td align="center">'
+        '<table role="presentation" width="560" cellpadding="0" cellspacing="0" '
+        'style="background:#0B132B;border:1px solid #1E293B;border-radius:12px;overflow:hidden">'
+        '<tr><td style="padding:24px 28px;border-bottom:1px solid #1E293B">'
+        '<span style="font-size:20px;color:#2DD4BF;font-family:Georgia,serif;letter-spacing:2px">KALYANI</span>'
+        '<span style="display:block;font-size:10px;color:#FF6B4A;letter-spacing:4px;margin-top:4px">TECHNOLOGIES</span>'
+        '</td></tr>'
+        '<tr><td style="padding:24px 28px;font-size:15px;color:#F1F5F9;line-height:1.6">'
+        '<strong>Reset your admin password</strong>'
+        '<p style="margin:12px 0 0;color:#94A3B8;font-size:13px">Someone requested a password reset for your '
+        f'{escape(EMAIL_FROM_NAME)} admin account. The link expires in 1 hour. If this wasn\'t you, ignore this email.</p>'
+        '</td></tr>'
+        '<tr><td style="padding:0 28px 28px">'
+        f'<a href="{escape(reset_url)}" style="display:inline-block;background:#14B8A6;color:#042F2E;'
+        'font-size:14px;font-weight:bold;text-decoration:none;padding:12px 28px;border-radius:999px">'
+        'Reset your password</a>'
+        '</td></tr>'
+        '<tr><td style="padding:16px 28px;border-top:1px solid #1E293B;font-size:11px;color:#94A3B8">'
+        f'Sent by {escape(EMAIL_FROM_NAME)}. We never ask for your password by email.'
+        '</td></tr></table></td></tr></table>'
+    )
+
+
+async def send_password_reset_email(email: str, token: str) -> None:
+    """Fire-and-forget: reset failures never leak account existence to the caller."""
+    if not EMAIL_KEY:
+        logger.warning("EMERGENT_EMAIL_KEY not set; skipping password reset email")
+        return
+    base = os.environ.get("APP_URL", "").rstrip("/")
+    reset_url = f"{base}/reset-password?token={token}"
+    try:
+        email_id = await send_email(
+            to=email,
+            subject=f"Reset your {EMAIL_FROM_NAME} admin password",
+            html=_reset_email_html(reset_url),
+        )
+        logger.info("Password reset email sent (id=%s) to %s", email_id, email)
+    except Exception:
+        logger.exception("Failed to send password reset email")

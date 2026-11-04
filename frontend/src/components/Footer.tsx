@@ -21,7 +21,7 @@ const COLUMNS = [
 ];
 
 export const Footer = () => (
-  <footer data-testid="site-footer" className="border-t border-line bg-white">
+  <footer data-testid="site-footer" className="border-t border-line bg-white dark:bg-[#05080D]">
     <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
       <div className="flex flex-col justify-between gap-12 lg:flex-row">
         <div className="max-w-sm">

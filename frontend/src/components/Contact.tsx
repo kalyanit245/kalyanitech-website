@@ -64,7 +64,7 @@ export const Contact = () => {
 
           <div className="mt-12 space-y-6">
             <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 text-teal-bright">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 dark:bg-[#0D2B2C]/60 text-teal-bright">
                 <Mail className="h-5 w-5" />
               </span>
               <div>
@@ -75,7 +75,7 @@ export const Contact = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 text-teal-bright">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-teal/25 bg-teal/10 dark:bg-[#0D2B2C]/60 text-teal-bright">
                 <MapPin className="h-5 w-5" />
               </span>
               <div>
@@ -84,7 +84,7 @@ export const Contact = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-coral/30 bg-coral/10 text-coral-soft">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-coral/30 bg-coral/10 text-coral-soft dark:bg-[#2C1210]/60">
                 <ShieldCheck className="h-5 w-5" />
               </span>
               <div>
